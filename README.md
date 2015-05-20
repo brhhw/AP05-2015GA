@@ -5,3 +5,5 @@
 Brandon Hwang and Michael Jin
 
 We will use Processing API to simulate the genetic algorithms described in class.
+
+Fixed setup function
