@@ -23,7 +23,7 @@ Individual selected;
   Setup the basic window properties
   ====================================*/
 void setup() {
-  int pS = ((int) Math.ceil(Math.random() * 100));
+  int pS = ((int) Math.ceil(Math.random() * 20));
  population = new Individual [pS];
   size((int)(Math.sqrt(pS) * 100), (int)(Math.sqrt(pS) * 100));
 }
