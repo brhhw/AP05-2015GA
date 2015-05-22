@@ -1,3 +1,5 @@
+//Brandon Hwang & Michael Jin
+
 //"Constants"
 int POPULATION_SIZE = 1;
 
@@ -11,6 +13,7 @@ float totalFitness;
 int speed;
 int generation;
 float mutationRate = 0.05;
+int pS;
 
 //The actual individuals
 Individual[] population;
@@ -23,9 +26,11 @@ Individual selected;
   Setup the basic window properties
   ====================================*/
 void setup() {
-  int pS = ((int) Math.ceil(Math.random() * 20));
+  pS = ((int) Math.ceil(Math.random() * 20));
  population = new Individual [pS];
-  size((int)(Math.sqrt(pS) * 100), (int)(Math.sqrt(pS) * 100));
+  //size((int)(Math.sqrt(pS) * 100), (int)((pS / ((int)Math.ceil(Math.sqrt(pS)))) * 100));
+  size((int)((pS / ((int)Math.ceil(Math.sqrt(pS)))) * 100),(int)(Math.sqrt(pS) * 100));
+  populate();
 }
 
 /*=====================================
@@ -38,6 +43,9 @@ void setup() {
   If mating mode is set to continuous, call mating season
   ====================================*/
 void draw() {
+  for (int i = 0 ; i < pS; i++) {
+     population[i].display();
+  }
 }
 
 /*=====================================
@@ -114,6 +122,10 @@ void setTotalFitness() {
   they display nicely in a grid.
   ==================================*/
 void populate() {
+  int buffer = 50;
+  for (int i = 0 ; i < pS; i++) {
+     population[i] = new Individual((float)(buffer + (100 * (i % (int)Math.sqrt(pS)))), (float)(buffer + (100 * (i / (int)Math.sqrt(pS)))));
+  }
 }
 
 /*====================================

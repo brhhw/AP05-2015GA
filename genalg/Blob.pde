@@ -12,13 +12,14 @@
   ====================================*/
 
 class Blob {
-  
+  int thickness;
   int numSides;
   int radius;
   float x;
   float y;
   int xFactor;
   int yFactor;
+  int rgb;
   
   Blob(float cx, float cy, int n, int l, int xf, int yf ) {
     
@@ -28,8 +29,18 @@ class Blob {
     radius = l;
     xFactor = xf;
     yFactor = yf;
+    thickness = 1;
   }
-  
+
+  void setWeight(boolean IDK) {
+     if (IDK) {
+       thickness = 5;
+     }
+     else {
+       thickness = 1;
+     }
+  }
+
   void display() {
    
     float nx;
@@ -38,8 +49,9 @@ class Blob {
     
     float sy;
   
-    strokeWeight(1);
+    strokeWeight(thickness);
     beginShape();
+    fill(((int)Math.floor(Math.random()*256)), ((int)Math.floor(Math.random()*256)), ((int)Math.floor(Math.random()*256)));
     for( float t = 0; t <= 1; t+=( 1.0/numSides ) ) {
       
       /*

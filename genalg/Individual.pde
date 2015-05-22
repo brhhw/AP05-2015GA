@@ -12,7 +12,7 @@
           green_color: green value
           blue_color: blue value
           x_factor: "wobble" factor for x values
-          y_factos: "wobbly" factor for y values
+          y_factor: "wobbly" factor for y values
       phenotype
         A regularGon object with traits the correspond to
         the values found in chromosome.
@@ -61,6 +61,7 @@ class Individual {
     sides...)
   ====================================*/
   Individual(float cx, float cy) {  
+    phenotype = new Blob (cx, cy, 4, 50, 0, 0);
   }
 
   /*=====================================
@@ -68,6 +69,8 @@ class Individual {
   color appropriately
   ====================================*/
   void display() {
+    phenotype.setWeight(true);
+    phenotype.display();
   }
 
   /*=====================================
