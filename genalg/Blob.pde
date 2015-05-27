@@ -19,7 +19,9 @@ class Blob {
   float y;
   int xFactor;
   int yFactor;
-  int rgb;
+  int r;
+  int g;
+  int b;
   
   Blob(float cx, float cy, int n, int l, int xf, int yf ) {
     
@@ -32,6 +34,11 @@ class Blob {
     thickness = 1;
   }
 
+  void setPhenotype(int cx, int cy) {
+    x = cx;
+    y = cy;
+  }
+
   void setWeight(boolean IDK) {
      if (IDK) {
        thickness = 5;
@@ -39,6 +46,12 @@ class Blob {
      else {
        thickness = 1;
      }
+  }
+
+  void setRGB(int r, int g, int b) {
+      this.r = r;
+      this.g = g;
+      this.b = b;
   }
 
   void display() {
@@ -51,7 +64,8 @@ class Blob {
   
     strokeWeight(thickness);
     beginShape();
-    fill(((int)Math.floor(Math.random()*256)), ((int)Math.floor(Math.random()*256)), ((int)Math.floor(Math.random()*256)));
+    //fill(((int)Math.floor(Math.random()*256)), ((int)Math.floor(Math.random()*256)), ((int)Math.floor(Math.random()*256)));
+    fill(r,g,b);
     for( float t = 0; t <= 1; t+=( 1.0/numSides ) ) {
       
       /*

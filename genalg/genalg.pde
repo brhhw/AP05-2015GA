@@ -29,7 +29,7 @@ void setup() {
   pS = ((int) Math.ceil(Math.random() * 20));
  population = new Individual [pS];
   //size((int)(Math.sqrt(pS) * 100), (int)((pS / ((int)Math.ceil(Math.sqrt(pS)))) * 100));
-  size((int)((pS / ((int)Math.ceil(Math.sqrt(pS)))) * 100),(int)(Math.sqrt(pS) * 100));
+  size((int)((pS / ((int)Math.ceil(Math.sqrt(pS)))) * 100),(int)(Math.ceil(Math.sqrt(pS) * 100)));
   populate();
 }
 
@@ -85,7 +85,14 @@ void keyPressed() {
      Do not include the "selected" Blob as a possible return value
   ==================================*/
 Individual select() {
-  return null;
+  this.setTotalFitness();
+  float rn = Math.random() * totalFitness;
+  for (int i = 0; i < pS; i++) {
+    if (population[i].fitness > rn) {
+      return population[i];
+    }
+  }
+  this.select();
 }
 
 /*====================================
@@ -105,6 +112,11 @@ void matingSeason() {
   in the population.
   ==================================*/
 void mutate() {
+  for (int i = 0; i < pS; i++) {
+    if (Math.random() < .5) {
+      population[i].mutate();
+    }
+  }
 }
 
 /*====================================
@@ -114,6 +126,10 @@ void mutate() {
   Make sure that each individual has an accurate fitness value
   ==================================*/
 void setTotalFitness() {
+  totalFitness = 0;
+  for (int i = 0; i < pS; i++) {
+    totalFitness = population[i].fitness;
+  }
 }
 
 /*====================================
@@ -125,6 +141,7 @@ void populate() {
   int buffer = 50;
   for (int i = 0 ; i < pS; i++) {
      population[i] = new Individual((float)(buffer + (100 * (i % (int)Math.sqrt(pS)))), (float)(buffer + (100 * (i / (int)Math.sqrt(pS)))));
+    population[i] = new Individual((float)(buffer + (100 * (i % (int)((pS / ((int)Math.ceil(Math.sqrt(pS)))))))), (float)(buffer + (100 * (i / (int)(Math.ceil(Math.sqrt(pS)))))));
   }
 }
 
@@ -135,6 +152,12 @@ void populate() {
   square border drawn around it.
   ==================================*/
 void findBest() {
+  float max = population[0].fitness;
+  for (int i = 1; i < pS; i++) {
+    if (max < population[i].fitness) {
+      max = population[i].fitness;
+    }
+  }
 }
        
      

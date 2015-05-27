@@ -62,6 +62,10 @@ class Individual {
   ====================================*/
   Individual(float cx, float cy) {  
     phenotype = new Blob (cx, cy, 4, 50, 0, 0);
+    chromosome = new Gene[10];
+    for (int i = 0; i < 10; i++) {
+      chromosome[i] = new Gene(10);
+    }
   }
 
   /*=====================================
@@ -70,6 +74,7 @@ class Individual {
   ====================================*/
   void display() {
     phenotype.setWeight(true);
+    phenotype.setRGB(RED_COLOR,GREEN_COLOR,BLUE_COLOR);
     phenotype.display();
   }
 
@@ -77,7 +82,8 @@ class Individual {
   Set phenotype to a new regulargon with center cx, cy and 
     properties that align with gene values.
   ====================================*/
-  void setPhenotype(int cx, int cy) {      
+  void setPhenotype(int cx, int cy) {
+   phenotype.setPhenotype(cx,cy); 
   }
   
   /*=====================================
@@ -85,7 +91,9 @@ class Individual {
   debugging and development
   ====================================*/
  void printIndividual() {
-     println( chromosome[0].value );
+   for (int i = 0; i < chromosome.length; i++) {
+     println( chromosome[i].value );
+   }
  }
 
   /*=====================================
@@ -107,6 +115,12 @@ class Individual {
     should be
   ====================================*/
  void setFitness( Individual goal ) {
+   float diff = 0;
+   float smite = 1.0f;
+   for (int i = 0; i < chromosome.length; i++) {
+      diff += ((float)this.chromosome[i].value - (float)goal.chromosome[i].value);
+   }
+   fitness = smite / diff;
  }
 
   /*=====================================
@@ -114,6 +128,11 @@ class Individual {
     of genes.
   ====================================*/
  void mutate() {
+    for (int i = 0; i < 10; i++) {
+      if (Math.random() < .5) {
+        chromosome[i] = new Gene(10);
+      }
+    }
  }
 
 }
